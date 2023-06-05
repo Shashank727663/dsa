@@ -111,8 +111,9 @@ class Solution
         //Your code here
          inordertrav(root);
         
-         sort(ans.begin(), ans.end(), greater<int>());
-         return ans[k-1];
+        int n = ans.size();
+        
+         return ans[n-k];
          
     }
 };
