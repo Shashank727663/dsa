@@ -5,44 +5,39 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
     private:
-    bool check(int source , vector<int> adj[] ,int vis[]) {
-        vis[source] =1;
-        queue<pair<int,int>>q;
-        q.push({source,-1});
-        // using bfs 
-        while(!q.empty()) {
-            int temp  = q.front().first;
-            int parent =  q.front().second;
-            q.pop();
+    bool dfs(int node ,int src,int vis[],vector<int> adj[] ) {
+        vis[node] =1;
+        vector<int> trev;
+        trev.push_back(node);
+        for(auto x : adj[node]) {
+           
             
-            for(auto x :adj[temp]) {
-                if(vis[x] == 0) {
-                    vis[x] =1;
-                    q.push({x,temp});
-                }
-                
-                else if(parent != x ) {
-                    return true;
-                }
+            if(vis[x] == 0) {
+              if(dfs(x,node,vis,adj) == true) {
+                  return true;
+              }
             }
+            else if(x != src ) {
+                return true;
+            }
+           
+            
         }
         
         return false;
-    }
+    } 
   public:
     // Function to detect cycle in an undirected graph.
     bool isCycle(int V, vector<int> adj[]) {
         // Code here
-        
         int vis[V] = {0};
-        for(int i=0;i<V;i++) {
-            if(vis[i] ==0 ) {
-                if(check(i,adj,vis) ==true) {
+        for(int i =0 ;i<V;i++) {
+            if(vis[i] == 0) {
+                if(dfs(i,0,vis,adj) == true){
                     return true;
                 }
-            }
+             }
         }
-        
         return false;
     }
 };
