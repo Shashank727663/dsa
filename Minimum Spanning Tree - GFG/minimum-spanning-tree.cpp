@@ -31,7 +31,11 @@ class Solution
             vis[node] = 1;
             ans =  ans + weight;
             for(auto x : adj[node]) {
-                /**/
+                /* 
+                in adjancey matrix 
+                [node , weight ]
+                */
+                
                 if(!vis[x[0]]) {
                     pq.push({ x[1] , x[0]});
                 }
