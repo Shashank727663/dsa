@@ -11,37 +11,32 @@ class Solution
     {
         // code here
         int ans  = 0;
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
-        
+        priority_queue<pair<int,int> , vector<pair<int,int>>, greater<pair<int,int>>>pq;
         vector<int>vis(V,0);
-        
-        pq.push({0,0});
-        // wt ,node 
-        
+        pq.push({ 0 , 0});
+        // weight , node..
         while(!pq.empty()) {
             auto temp = pq.top();
             pq.pop();
             
+            int node  = temp.second;
             int weight = temp.first;
-            int node = temp.second;
             
             if(vis[node] == 1) {
                 continue;
             }
             
-            vis[node] = 1;
-            ans =ans + weight;
+            // if not visited
             
-            for(auto x:adj[node] ) {
-                int adjnode = x[0];
-                int wt = x[1];
-                if(!vis[adjnode]) {
-                    pq.push( { wt ,adjnode});
+            vis[node] = 1;
+            ans =  ans + weight;
+            for(auto x : adj[node]) {
+                /**/
+                if(!vis[x[0]]) {
+                    pq.push({ x[1] , x[0]});
                 }
             }
-            
         }
-        
         return ans;
     }
 };
