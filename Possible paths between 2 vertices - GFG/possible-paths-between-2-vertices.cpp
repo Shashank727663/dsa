@@ -17,7 +17,7 @@ class Solution {
             dfs(x,end,adj,ans);
         }
         
-        return;
+        
      }
   public:
     // Function to count paths between two vertices in a directed graph.
