@@ -6,51 +6,35 @@ using namespace std;
 class Solution {
   public:
     int CheapestFLight(int n, vector<vector<int>>& flights, int src, int dst, int K)  {
-        // 1 graph creation 
-        vector<pair<int,int>>adj[n];
-        // nextnode , cost 
-        for(auto x : flights) {
-            adj[x[0]].push_back({ x[1] , x[2]});
-            
-        }
+        // Code here
         
-        // queue 
-        queue<pair<int,pair<int,int>>>q;
-        // stops , node , weight 
+        // using bellman ford algorithm 
         
-        
-        q.push({ 0 , { src , 0}});
         vector<int>dist(n,1e8);
-        dist[src] = 0;
         
-        while(!q.empty()) {
-            int node = q.front().second.first;
-            int stops = q.front().first;
-            int wt  = q.front().second.second;
-            q.pop();
-            if(stops > K) {
-                continue;
+        dist[src] = 0;
+        for(int i = 0 ; i<=K;i++) {
+            
+            // using an extra space for data consistency
+            vector<int> temp = dist;
+            for(auto x : flights) {
+                int  u  =x[0];
+                int v = x[1];
+                int w = x[2];
+                temp[v] =  min ( temp[v] , dist[u] + w);
+              
             }
             
-            
-            for(auto x : adj[node]) {
-                int newnode = x.first;
-                int newcost = x.second;
-                
-                if(dist[newnode] > newcost + wt && stops <= K ) {
-                    dist[newnode] = newcost + wt;
-                    q.push( { stops + 1 , { newnode ,  wt + newcost}});
-                }
-            }
+            dist = temp;
+            // swapping the vectors
         }
         
-        if( dist[dst] == 1e8) {
+        
+        if(dist[dst] == 1e8) {
             return -1;
         }
         
-        
         return dist[dst];
-        
     }
 };
 
