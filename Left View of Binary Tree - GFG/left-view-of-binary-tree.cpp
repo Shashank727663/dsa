@@ -126,24 +126,25 @@ struct Node
     }
 };
  */
-void trev(Node* root ,int level ,vector<int>&ans) {
-    if(root == nullptr) {
-        return;
-    }
-    
-    if(ans.size() == level) {
-        ans.push_back(root -> data);
-    }
-    
-    trev(root -> left,level+1,ans);
-    trev(root -> right,level+1,ans);
-}
+
 //Function to return a list containing elements of left view of the binary tree.
+ void trev(Node* root,int level,vector<int>&ans) {
+        if( root == NULL) 
+        return;
+        
+        
+        if(ans.size() == level ) 
+        ans.push_back(root -> data);
+        
+        trev(root -> left, level+1,ans);
+        trev(root-> right,level+1,ans);
+    }
 vector<int> leftView(Node *root)
 {
    // Your code here
-  vector<int>ans;
-  trev(root,0,ans);
-  return ans;
-   
+   // Your Code here
+       vector<int>ans;
+       int lvl = 0;
+       trev(root,lvl,ans);
+       return ans;
 }
