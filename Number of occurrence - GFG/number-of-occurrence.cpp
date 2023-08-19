@@ -14,16 +14,11 @@ public:
 	    // code here
 	    unordered_map<int,int>map;
 	    
-	    for(int i = 0;i<n;i++) {
+	    for(int i = 0 ; i < n ;i++) {
 	        map[arr[i]]++;
 	    }
 	    
-	    int ans  = 0;
-	    for(auto r  : map ) {
-	        ans = map[x];
-	    }
-	    
-	    return ans;
+	    return map[x];
 	}
 };
 
