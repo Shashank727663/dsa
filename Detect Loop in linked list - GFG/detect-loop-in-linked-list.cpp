@@ -49,23 +49,23 @@ class Solution
     bool detectLoop(Node* head)
     {
         // your code here
-        set<Node*>s;
+        Node* slow = head;
+        Node* fast = head;
         
-        
-        Node* temp = head;
-        
-        
-        while(temp != NULL ) {
-            if(s.find(temp) != s.end()) {
-                return 1;
-            }
+        while(fast != NULL && fast -> next != NULL ) {
+            slow = slow -> next;
+            fast = fast -> next -> next;
             
-          s.insert(temp);
-           temp = temp -> next;
+            if( slow == fast) {
+                return true;
+            }
         }
+        return false;
         
-        return 0;
+        
     }
+    
+    
 };
 
 
