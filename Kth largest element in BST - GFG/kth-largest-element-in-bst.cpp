@@ -96,25 +96,24 @@ struct Node {
 // return the Kth largest element in the given BST rooted at 'root'
 class Solution
 {
-    public:
-    vector<int >ans;
-    void inordertrav (Node* root){
+    private:
+    void trev(Node* root , vector<int>&ans) {
+        if(root == NULL ) {
+            return;
+        }
         
-        if (!root) return;
-        
-       inordertrav(root->left);
-       ans.push_back (root->data);
-       inordertrav (root->right);
+        trev(root -> left ,ans);
+        ans.push_back(root -> data);
+        trev(root -> right,ans);
     }
-    int kthLargest(Node *root, int k)
+    public:
+    int kthLargest(Node *root, int K)
     {
         //Your code here
-         inordertrav(root);
-        
+        vector<int>ans;
+        trev(root , ans);
         int n = ans.size();
-        
-         return ans[n-k];
-         
+        return ans[n - K];
     }
 };
 
