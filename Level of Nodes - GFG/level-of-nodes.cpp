@@ -10,29 +10,28 @@ class Solution
 	//Function to find the level of node X.
 	int nodeLevel(int V, vector<int> adj[], int X) 
 	{
-	    // code here
+	    vector<int>vis(V,0);
 	    queue<pair<int,int>>q;
 	    q.push({ 0 , 0 });
-	    vector<int>vis(V,0);
-	    
+	    vis[0] = 1;
 	    while(!q.empty()) {
 	        int node = q.front().first;
 	        int lvl = q.front().second;
 	        q.pop();
+	        
 	        if(node == X) {
 	            return lvl;
 	        }
-	        
-	        for(auto x: adj[node]) {
-	            if(!vis[x] ) {
+	        for(auto x : adj[node]) {
+	            if(!vis[x]) {
 	                vis[x] = 1;
-	                q.push({ x, lvl + 1});
+	                q.push({ x , lvl + 1});
 	            }
 	        }
 	    }
 	    
-	    
 	    return -1;
+	    // code here
 	}
 };
 
