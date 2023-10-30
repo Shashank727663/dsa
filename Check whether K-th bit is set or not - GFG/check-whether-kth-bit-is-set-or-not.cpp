@@ -17,7 +17,18 @@ class Solution
     {
         // Your code here
         // It can be a one liner logic!! Think of it!!
-        return (n >> k) & 1;
+        int i = 0;
+        while( n > 0 ) {
+            int bit = n % 2;
+            if( i == k  &&  bit == 1 ) {
+                return true;
+            }
+            i++;
+            n = n / 2;
+        }
+        
+        return false;
+        
     }
 };
 
